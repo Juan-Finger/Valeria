@@ -34,7 +34,9 @@
   let yt = null, ytReady = false, ytRequested = false, ytFailed = false, pending = null, ytTimeout = null, autoplayCheck = null, tick = null;
   const audio = $('#audio');
   const player = $('#player');
-  const isMp3 = i => !!(TRACKS[i] && TRACKS[i].mp3);
+  // MP3 que não foi encontrado: aquela faixa volta a tocar pelo YouTube
+  const mp3Missing = new Set();
+  const isMp3 = i => !!(TRACKS[i] && TRACKS[i].mp3) && !mp3Missing.has(i);
 
   const FILE_MSG = 'A música do YouTube não toca com a página aberta direto do arquivo. Sirva a pasta por http (ex.: npx serve ou python -m http.server) e abra de novo.';
   const YT_ERRORS = {
@@ -153,7 +155,7 @@
     updateUI();
     setProgress(0, 0);
 
-    if (t.mp3) {
+    if (isMp3(S.current)) {
       if (ytReady) yt.stopVideo();
       audio.src = t.mp3;
       audio.volume = S.volume / 100;
@@ -185,8 +187,8 @@
   }
   function resume() {
     const t = TRACKS[S.current];
-    if (t.mp3 && audio.src) { audio.play().then(() => setPlaying(true)).catch(nudge); return; }
-    if (!t.mp3 && ytState() === 2) { yt.playVideo(); return; }
+    if (isMp3(S.current) && audio.src) { audio.play().then(() => setPlaying(true)).catch(nudge); return; }
+    if (!isMp3(S.current) && ytState() === 2) { yt.playVideo(); return; }
     play(S.current, { fromHistory: true });
   }
   function nextIndex() {
@@ -296,11 +298,12 @@
   audio.addEventListener('play', () => { if (isMp3(S.current)) setPlaying(true); });
   audio.addEventListener('error', () => {
     if (!audio.getAttribute('src')) return;
-    const t = TRACKS[S.current];
-    toast(`Não achei o arquivo "${t.mp3}" de "${t.song}". Pulando…`);
-    S.failed.add(S.current);
+    const i = S.current, t = TRACKS[i];
+    console.warn(`[Valéria] não achei "${t.mp3}"; "${t.song}" vai tocar pelo YouTube.`);
+    mp3Missing.add(i);
     audio.removeAttribute('src');
-    next();
+    if (t.youtube) play(i, { fromHistory: true });   // cai para o clipe do YouTube
+    else { S.failed.add(i); toast(`Não achei o arquivo "${t.mp3}" de "${t.song}". Pulando…`); next(); }
   });
 
   $('#toggle').addEventListener('click', () => {
