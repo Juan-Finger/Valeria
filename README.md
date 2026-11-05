@@ -1,6 +1,6 @@
 # Valéria · Turnê de Aniversário
 
-Site estático (HTML + CSS + JS, sem build). Publicado no GitHub Pages: https://juan-finger.github.io/valeria/
+Site estático (HTML + CSS + JS, sem build). Publicado no GitHub Pages: https://juan-finger.github.io/Valeria/
 
 Fotos em `fotos/` (originais, nunca editados): `valeria-1.jpg` vestido verde-água, `valeria-2.jpg` selfie em círculo,
 `valeria-3.webp` selfie ao ar livre, `valeria-4.jpg` foto de estúdio em grupo, `valeria-5.jpg` selfie na sala de reunião.
