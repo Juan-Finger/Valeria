@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valéria · Turnê de Aniversário</title>
+<meta name="description" content="Uma surpresa da equipe pro aniversário da Valéria: tracklist, álbum de fotos, bolo com velinhas e uma carta.">
+<meta name="theme-color" content="#1B1F3B">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Compartilhamento (WhatsApp / Instagram / Facebook)
+     IMPORTANTE: depois de publicar, troque o og:image por uma URL COMPLETA
+     (ex.: https://seu-usuario.github.io/valeria/fotos/valeria-1.jpg).
+     WhatsApp e Facebook ignoram caminhos relativos.
+     O script scripts/otimizar_fotos.py gera fotos/web/og-valeria.jpg (1200x630) e
+     atualiza esta linha sozinho. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Feliz aniver, Valéria!">
+<meta property="og:description" content="A turnê de aniversário da pessoa mais querida do time. Abre aí e aumenta o som.">
+<meta property="og:image" content="https://juan-finger.github.io/valeria/fotos/web/og-valeria.jpg">
+<meta property="og:image:alt" content="Valéria de vestido verde-água, sorrindo">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231B1F3B'/%3E%3Cpath d='M50 14l9 25h27l-22 16 8 26-22-16-22 16 8-26-22-16h27z' fill='%23FFD84A'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.youtube.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+<noscript><style>#splash{display:none}</style></noscript>
+
+<!-- Lista de músicas (edite lá) e a lógica da página -->
+<script src="js/musicas.js" defer></script>
+<script src="js/app.js" defer></script>
+</head>
+<body>
+
+<!-- Ícones reutilizáveis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L9.2 4.5A.8.8 0 0 0 8 5.2z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.2" height="14" rx="1" fill="currentColor"/><rect x="13.8" y="5" width="4.2" height="14" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path fill="currentColor" d="M6 6h2.2v12H6zM9.6 12 19.4 18V6z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" d="M15.8 6H18v12h-2.2zM4.6 18l9.8-6-9.8-6z"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 4h4v4M4 20 20 4M20 16v4h-4M15 15l5 5M4 4l5 5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 6h11M4 12h11M4 18h7"/><path fill="currentColor" d="M16 14.5v5.2a2 2 0 1 1-1.5-1.9V12l5 1.3v2z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M10 9.2v5.6l4.6-2.8z"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24"><path fill="currentColor" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></symbol>
+  <!-- tubinho de bala açucarada (desenho original) -->
+  <symbol id="g-tube" viewBox="0 0 84 30">
+    <clipPath id="g-tube-clip"><rect x="3" y="3" width="78" height="24" rx="12"/></clipPath>
+    <g clip-path="url(#g-tube-clip)">
+      <rect x="0" y="0" width="84" height="30" fill="var(--c1,#F4A6B8)"/>
+      <path d="M16 0h10L14 30H4zM42 0h10L40 30H30zM68 0h10L66 30H56z" fill="var(--c2,#FFFFFF)"/>
+      <g fill="#fff" opacity=".9"><circle cx="11" cy="9" r="1.4"/><circle cx="24" cy="20" r="1.2"/><circle cx="36" cy="10" r="1.3"/><circle cx="49" cy="21" r="1.4"/><circle cx="61" cy="9" r="1.2"/><circle cx="73" cy="19" r="1.3"/><circle cx="30" cy="16" r="1"/><circle cx="56" cy="15" r="1"/></g>
+    </g>
+    <rect x="3" y="3" width="78" height="24" rx="12" fill="none" stroke="#1B1F3B" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="g-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z"/></symbol>
+</svg>
+
+<!-- ================= SPLASH (ingresso) ================= -->
+<div id="splash" role="dialog" aria-modal="true" aria-labelledby="splash-title" aria-describedby="splash-desc">
+  <div class="ticket">
+    <div class="ticket-main">
+      <div class="ticket-top">
+        <span class="eyebrow">Acesso VIP · Turnê de aniversário</span>
+        <span class="ticket-code mono" aria-hidden="true">Nº 0001</span>
+      </div>
+      <p id="splash-title" class="display ticket-name">Valéria</p>
+      <p id="splash-desc" class="ticket-desc">Hoje o show é todo seu. Aumenta o som e vem.</p>
+      <dl class="ticket-info mono">
+        <div><dt>Setor</dt><dd>VIP</dd></div>
+        <div><dt>Portão</dt><dd>Aniversário</dd></div>
+        <div><dt>Fila</dt><dd>Da equipe</dd></div>
+      </dl>
+      <button class="btn btn-big" id="enter" type="button">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-play"/></svg>
+        Abrir a surpresa
+      </button>
+      <span class="ticket-small">Com trilha sonora do One Direction</span>
+    </div>
+    <div class="ticket-stub" aria-hidden="true">
+      <span class="stub-label">Acesso VIP</span>
+      <span class="barcode"></span>
+      <span class="stub-label mono">Entrada única</span>
+    </div>
+  </div>
+</div>
+
+<main id="conteudo">
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-strip mono" aria-hidden="true">
+      <span>Turnê de aniversário</span><span>✦</span><span>Edição da equipe</span><span class="hide-sm">✦</span><span class="hide-sm">Lado A + faixa bônus</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Edição especial · Aniversário</span>
+        <h1 class="display hero-title" id="topo" tabindex="-1">
+          <span class="l1">Feliz aniver,</span>
+          <span class="l2">Valéria!</span>
+        </h1>
+        <p class="sub">Poderosa, dona de si e com a autoestima no último volume. Hoje a gente comemora a pessoa mais querida do time, e com trilha sonora à altura: One Direction.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#tracklist">Ver a tracklist dela</a>
+          <span class="hand note">
+            <svg class="note-arrow" width="46" height="30" viewBox="0 0 46 30" aria-hidden="true"><path d="M44 22C32 30 14 26 6 8M6 8l-1 10M6 8l9 3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            aperta o play!
+          </span>
+        </div>
+      </div>
+
+      <figure class="hero-photo">
+        <span class="sticker pill s1">Aniversariante</span>
+        <div class="polaroid">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="frame crop-1">
+            <img data-foto src="fotos/web/valeria-1.webp" alt="Valéria de vestido verde-água, sorrindo" fetchpriority="high" decoding="async">
+          </div>
+          <figcaption class="hand">a dona do dia ♡</figcaption>
+        </div>
+        <span class="sticker burst s2">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,1.0 56.9,10.6 66.8,4.0 70.0,15.4 81.5,12.5 80.6,24.3 92.4,25.5 87.6,36.3 98.3,41.5 90.0,50.0 98.3,58.5 87.6,63.7 92.4,74.5 80.6,75.7 81.5,87.5 70.0,84.6 66.8,96.0 56.9,89.4 50.0,99.0 43.1,89.4 33.2,96.0 30.0,84.6 18.5,87.5 19.4,75.7 7.6,74.5 12.4,63.7 1.7,58.5 10.0,50.0 1.7,41.5 12.4,36.3 7.6,25.5 19.4,24.3 18.5,12.5 30.0,15.4 33.2,4.0 43.1,10.6"/></svg>
+          <span><small>Autoestima</small> 100%</span>
+        </span>
+        <svg class="deco-tube t1" width="84" height="30" aria-hidden="true" style="--c1:var(--mint)"><use href="#g-tube"/></svg>
+        <svg class="deco-tube t2" width="84" height="30" aria-hidden="true" style="--c1:var(--yellow);--c2:var(--pink)"><use href="#g-tube"/></svg>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MARQUEE ================= -->
+<div class="tapes" aria-hidden="true">
+  <div class="tape-band b">
+    <div class="marquee-track">
+      <div class="marquee-group"><span>Turnê de aniversário</span><span>Edição da equipe</span><span>Lado A</span><span>Faixa bônus</span><span>Acesso VIP</span><span>Turnê de aniversário</span><span>Edição da equipe</span><span>Lado A</span><span>Faixa bônus</span><span>Acesso VIP</span></div>
+      <div class="marquee-group"><span>Turnê de aniversário</span><span>Edição da equipe</span><span>Lado A</span><span>Faixa bônus</span><span>Acesso VIP</span><span>Turnê de aniversário</span><span>Edição da equipe</span><span>Lado A</span><span>Faixa bônus</span><span>Acesso VIP</span></div>
+    </div>
+  </div>
+  <div class="tape-band a">
+    <div class="marquee-track">
+      <div class="marquee-group"><span>Poderosa</span><span>Dona de si</span><span>Muito inteligente</span><span>Sempre pronta pra ajudar</span><span>Querida por todos</span><span>Nunca fica brava</span><span>Engraçada demais</span><span>Viciada em Fini</span><span>Rata de academia</span><span>Pagode no fone</span></div>
+      <div class="marquee-group"><span>Poderosa</span><span>Dona de si</span><span>Muito inteligente</span><span>Sempre pronta pra ajudar</span><span>Querida por todos</span><span>Nunca fica brava</span><span>Engraçada demais</span><span>Viciada em Fini</span><span>Rata de academia</span><span>Pagode no fone</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TRACKLIST ================= -->
+<section id="tracklist" class="tracklist-sec" aria-labelledby="tracklist-title">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div>
+        <span class="eyebrow">Lado A · Faixa a faixa</span>
+        <h2 class="display" id="tracklist-title">A Valéria em 8 músicas</h2>
+      </div>
+      <p>Cada música do 1D combina com um pedacinho dela. Toque num card pra ouvir, e toque de novo pra pausar.</p>
+    </div>
+    <div class="tracks" id="tracks"></div>
+  </div>
+</section>
+
+<!-- ================= AGENDA ================= -->
+<section class="agenda-sec" aria-labelledby="agenda-title">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div>
+        <span class="eyebrow">Agenda oficial</span>
+        <h2 class="display" id="agenda-title">Paradas da turnê</h2>
+      </div>
+      <p>Onde encontrar a Valéria, segundo o time. Ingressos limitados.</p>
+    </div>
+    <ol class="tour">
+      <li data-reveal><span class="tour-n mono">01</span><span class="tour-where display">Academia</span><span class="tour-when mono">Todo santo dia</span><span class="tour-tag">Treino pago</span></li>
+      <li data-reveal><span class="tour-n mono">02</span><span class="tour-where display">Mesa do escritório</span><span class="tour-when mono">Sempre que alguém precisa</span><span class="tour-tag">Plantão de ajuda</span></li>
+      <li data-reveal><span class="tour-n mono">03</span><span class="tour-where display">Roda de pagode</span><span class="tour-when mono">Fim de semana</span><span class="tour-tag">Pagode no fone também</span></li>
+      <li data-reveal><span class="tour-n mono">04</span><span class="tour-where display">Bomboniere</span><span class="tour-when mono">A qualquer hora</span><span class="tour-tag">Estoque de Fini</span></li>
+      <li data-reveal class="tour-today"><span class="tour-n mono">05</span><span class="tour-where display">Aniversário da Valéria</span><span class="tour-when mono">Hoje</span><span class="tour-tag stamp">Esgotado</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= GALERIA ================= -->
+<section class="gallery-sec" aria-labelledby="gallery-title">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div>
+        <span class="eyebrow">Bastidores da turnê</span>
+        <h2 class="display" id="gallery-title">Álbum de fotos</h2>
+      </div>
+      <p>Toque numa foto pra ampliar. Dá pra passar com as setas ou arrastando pro lado.</p>
+    </div>
+    <div class="gallery">
+      <button class="photo photo-pol" type="button" data-i="0" data-full="fotos/valeria-1.jpg" data-crop="crop-1" data-cap="modo evento" data-alt="Valéria de vestido verde-água, sorrindo" aria-label="Ampliar foto da Valéria de vestido verde-água" data-reveal>
+        <span class="pol">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="frame crop-1"><img data-foto src="fotos/web/valeria-1.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="cap hand">modo evento</span>
+        </span>
+      </button>
+      <button class="photo photo-vinyl" type="button" data-i="1" data-full="fotos/valeria-2.jpg" data-crop="crop-2" data-cap="modo selfie" data-alt="Selfie da Valéria fazendo biquinho" aria-label="Ampliar selfie da Valéria fazendo biquinho" data-reveal style="--d:.12s">
+        <span class="record">
+          <span class="sheen" aria-hidden="true"></span>
+          <span class="frame crop-2"><img data-foto src="fotos/web/valeria-2.webp" alt="" width="1206" height="943" loading="lazy" decoding="async"></span>
+        </span>
+        <span class="cap hand tag">modo selfie</span>
+      </button>
+      <button class="photo photo-instax" type="button" data-i="2" data-full="fotos/valeria-3.webp" data-crop="crop-3" data-cap="modo poderosa" data-alt="Selfie da Valéria ao ar livre" aria-label="Ampliar selfie da Valéria ao ar livre" data-reveal style="--d:.24s">
+        <span class="pol">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="frame crop-3"><img data-foto src="fotos/web/valeria-3.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="cap hand">modo poderosa</span>
+        </span>
+      </button>
+    </div>
+    <div class="gallery gallery-2">
+      <button class="photo photo-print" type="button" data-i="3" data-full="fotos/valeria-4.jpg" data-crop="crop-4" data-cap="em boa companhia" data-alt="Foto de estúdio com cinco pessoas abraçadas e um pug no colo" aria-label="Ampliar foto de estúdio com cinco pessoas e um pug" data-reveal>
+        <span class="pol">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="frame crop-4"><img data-foto src="fotos/web/valeria-4.webp" alt="" width="1206" height="1043" loading="lazy" decoding="async"></span>
+          <span class="cap hand">em boa companhia</span>
+        </span>
+      </button>
+      <button class="photo photo-pol2" type="button" data-i="4" data-full="fotos/valeria-5.jpg" data-crop="crop-5" data-cap="bastidores do escritório" data-alt="Selfie de um grupo de colegas numa sala de reunião" aria-label="Ampliar selfie do grupo na sala de reunião" data-reveal style="--d:.12s">
+        <span class="pol">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="frame crop-5"><img data-foto src="fotos/web/valeria-5.webp" alt="" width="1200" height="1600" loading="lazy" decoding="async"></span>
+          <span class="cap hand">bastidores do escritório</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FICHA / RIDER ================= -->
+<section class="rider-sec" aria-labelledby="rider-title">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div>
+        <span class="eyebrow">Ficha técnica</span>
+        <h2 class="display" id="rider-title">Especificações da Valéria</h2>
+      </div>
+      <p>Dados oficiais, conferidos pelo time inteiro. Também conhecido como o rider do camarim.</p>
+    </div>
+
+    <div class="rider" data-reveal>
+      <div class="rider-head mono" aria-hidden="true">
+        <span>Rider técnico · Camarim: Valéria</span>
+        <span class="rider-stamp">Aprovado pela equipe</span>
+      </div>
+      <div class="ficha">
+        <article class="card">
+          <svg class="card-ico" width="64" height="24" aria-hidden="true" style="--c1:var(--pink)"><use href="#g-tube"/></svg>
+          <h3 class="k">Combustível</h3>
+          <p class="v">Fini e doces</p>
+          <p>De preferência um pacotinho na mesa e outro na bolsa, de reserva.</p>
+          <button class="btn btn-sm" id="refill" type="button">Repor o estoque</button>
+          <p class="refill-count mono" id="refill-count" aria-live="polite"></p>
+        </article>
+        <article class="card">
+          <svg class="card-ico" width="44" height="44" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="7" height="20" rx="2" fill="var(--yellow)"/><rect x="35" y="14" width="7" height="20" rx="2" fill="var(--yellow)"/><rect x="1.5" y="18" width="4.5" height="12" rx="1.5" fill="var(--red)"/><rect x="42" y="18" width="4.5" height="12" rx="1.5" fill="var(--red)"/><path d="M13 24h22"/></g></svg>
+          <h3 class="k">Rotina</h3>
+          <p class="v">Academia direto</p>
+          <p>Treino pago, foco em dia, e ainda sobra energia pro resto do mundo.</p>
+        </article>
+        <article class="card">
+          <svg class="card-ico pandeiro" width="44" height="44" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="var(--mint)" stroke="var(--ink)" stroke-width="3"/><circle cx="24" cy="24" r="12" fill="#fff" stroke="var(--ink)" stroke-width="2"/><g fill="var(--yellow)" stroke="var(--ink)" stroke-width="2"><rect x="20" y="1.5" width="8" height="6" rx="2"/><rect x="20" y="40.5" width="8" height="6" rx="2"/><rect x="1.5" y="21" width="6" height="8" rx="2"/><rect x="40.5" y="21" width="6" height="8" rx="2"/></g></svg>
+          <h3 class="k">Trilha alternativa</h3>
+          <p class="v">Pagode</p>
+          <p>Porque One Direction e pagode cabem na mesma playlist, sim.</p>
+        </article>
+        <article class="card">
+          <svg class="card-ico" width="44" height="44" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5a14 14 0 0 0-8.5 25.1V35h17v-4.9A14 14 0 0 0 24 5z" fill="var(--yellow)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><path d="M18 41h12M20 45.5h8" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><path d="M24 35V24l-4-4M24 24l4-4" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="k">Processador</h3>
+          <p class="v">Muito inteligente</p>
+          <p>Resolve, explica e ainda ajuda quem tá do lado.</p>
+        </article>
+
+        <article class="card amp">
+          <div class="amp-top" aria-hidden="true">
+            <span class="amp-brand mono">Teste interativo</span>
+            <span class="knobs"><i></i><i></i><i></i></span>
+          </div>
+          <label class="amp-label display" for="ego">Nível de autoestima da Valéria</label>
+          <div class="leds" id="leds" aria-hidden="true"></div>
+          <input id="ego" type="range" min="0" max="100" value="100" aria-describedby="quip" aria-valuetext="100%, no máximo">
+          <div class="amp-row">
+            <span class="hand quip" id="quip" aria-live="polite">Tenta abaixar. Eu duvido.</span>
+            <output id="ego-out" for="ego" class="display">100%</output>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOLO ================= -->
+<section class="cake-sec" aria-labelledby="cake-title">
+  <div class="wrap">
+    <span class="eyebrow">Momento oficial</span>
+    <h2 class="display" id="cake-title">Assopra as velinhas</h2>
+    <p class="lead">Toca em cada velinha pra apagar. Quando todas apagarem, o pedido tá feito.</p>
+
+    <div class="cake-stage" id="cake-stage">
+      <div class="candles" id="candles">
+        <button class="candle" type="button" aria-label="Apagar velinha 1"><span class="flame"></span><span class="smoke"></span><span class="stick"></span></button>
+        <button class="candle" type="button" aria-label="Apagar velinha 2"><span class="flame"></span><span class="smoke"></span><span class="stick"></span></button>
+        <button class="candle" type="button" aria-label="Apagar velinha 3"><span class="flame"></span><span class="smoke"></span><span class="stick"></span></button>
+        <button class="candle" type="button" aria-label="Apagar velinha 4"><span class="flame"></span><span class="smoke"></span><span class="stick"></span></button>
+        <button class="candle" type="button" aria-label="Apagar velinha 5"><span class="flame"></span><span class="smoke"></span><span class="stick"></span></button>
+      </div>
+      <svg class="cake" viewBox="0 0 440 210" aria-hidden="true">
+        <!-- prato -->
+        <ellipse cx="220" cy="196" rx="214" ry="12" fill="#1B1F3B"/>
+        <!-- massa -->
+        <rect x="30" y="40" width="380" height="150" rx="18" fill="#F4A6B8" stroke="#1B1F3B" stroke-width="4"/>
+        <path d="M32 124h376" stroke="#1B1F3B" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+        <rect x="30" y="140" width="380" height="14" fill="#D92B24"/>
+        <path d="M30 140h380M30 154h380" stroke="#1B1F3B" stroke-width="3"/>
+        <!-- cobertura com escorrido -->
+        <path d="M30 58a18 18 0 0 1 18-18h344a18 18 0 0 1 18 18v14v10c0 10-14 10-14 0v-10c0-8-14-8-14 0v26c0 14-18 14-18 0v-26c0-10-16-10-16 0v18c0 12-16 12-16 0v-18c0-10-16-10-16 0v24c0 14-18 14-18 0v-24c0-8-14-8-14 0v20c0 12-16 12-16 0v-20c0-10-16-10-16 0v22c0 14-18 14-18 0v-22c0-8-14-8-14 0v16c0 12-16 12-16 0v-16c0-10-16-10-16 0v26c0 14-18 14-18 0v-26c0-8-14-8-14 0v18c0 12-16 12-16 0v-18c0-10-16-10-16 0v20c0 14-18 14-18 0v-20c0-8-14-8-14 0v14c0 12-16 12-16 0v-14c0-10-16-10-16 0v24c0 14-18 14-18 0v-24c0-4-6-4-6 0v4c0 4-6 4-6 0v-4V58z" fill="#FFFFFF" stroke="#1B1F3B" stroke-width="4" stroke-linejoin="round"/>
+        <!-- confeitos -->
+        <g stroke-linecap="round" stroke-width="5">
+          <path d="M64 168l8-4" stroke="#FFD84A"/><path d="M116 172l8 3" stroke="#9FE3D0"/><path d="M170 166l6-6" stroke="#FFFFFF"/><path d="M232 172l8 2" stroke="#FFD84A"/><path d="M290 166l7-5" stroke="#9FE3D0"/><path d="M350 172l8 3" stroke="#FFFFFF"/><path d="M380 164l6-6" stroke="#FFD84A"/>
+          <path d="M92 112l6-6" stroke="#FFD84A"/><path d="M200 116l8 2" stroke="#9FE3D0"/><path d="M262 108l7 4" stroke="#FFFFFF"/><path d="M330 116l6-6" stroke="#FFD84A"/>
+        </g>
+      </svg>
+      <!-- balas em cima do bolo -->
+      <svg class="cake-tube ct1" width="64" height="24" aria-hidden="true" style="--c1:var(--mint)"><use href="#g-tube"/></svg>
+      <svg class="cake-tube ct2" width="64" height="24" aria-hidden="true" style="--c1:var(--yellow);--c2:var(--red)"><use href="#g-tube"/></svg>
+      <svg class="cake-tube ct3" width="64" height="24" aria-hidden="true" style="--c1:var(--red)"><use href="#g-tube"/></svg>
+    </div>
+    <p class="mono candle-count" id="candle-count" aria-live="polite">5 velinhas acesas</p>
+    <p class="hand" id="wish" aria-live="polite"></p>
+    <button class="btn ghost" id="relight" type="button" hidden>Acender de novo</button>
+  </div>
+</section>
+
+<!-- ================= CARTA ================= -->
+<section class="letter-sec" aria-labelledby="letter-title">
+  <div class="wrap">
+    <article class="letter" data-reveal>
+      <span class="tape" aria-hidden="true"></span>
+      <svg class="letter-tube" width="84" height="30" aria-hidden="true" style="--c1:var(--pink)"><use href="#g-tube"/></svg>
+      <span class="eyebrow">Faixa bônus</span>
+      <h2 class="display" id="letter-title">Pra você, Val</h2>
+      <p>Tem gente que chega e muda o clima da sala, e você é assim. Poderosa, dona de si e com uma autoestima que inspira qualquer um. Você sabe o valor que tem e nunca deixa ninguém esquecer.</p>
+      <p>Além de muito inteligente, você é sempre a primeira a se oferecer pra ajudar. Nunca te vimos brava, e as risadas que você arranca do time salvam qualquer dia corrido. Não é à toa que todo mundo gosta de você.</p>
+      <p>Que esse novo ano venha doce como um pacote de Fini, com treino em dia, pagode no fim de semana e One Direction no repeat. Você merece tudo isso e muito mais.</p>
+      <p class="hand sign">Feliz aniversário! Com carinho, da sua equipe ♡</p>
+    </article>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Feito com carinho pro aniversário da Valéria · Músicas: One Direction (vídeos oficiais via YouTube)</p>
+</footer>
+</main>
+
+<!-- ================= LIGHTBOX ================= -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-cap" hidden>
+  <div class="lb-stage">
+    <figure class="lb-figure" id="lb-figure">
+      <div class="lb-frame" id="lb-frame"><img id="lb-img" src="data:," alt=""></div>
+      <figcaption class="hand" id="lb-cap"></figcaption>
+    </figure>
+  </div>
+  <span class="lb-count mono" id="lb-count" aria-hidden="true"></span>
+  <button class="icon-btn lb-btn lb-close" id="lb-close" type="button" aria-label="Fechar foto"><svg width="22" height="22" aria-hidden="true"><use href="#i-close"/></svg></button>
+  <button class="icon-btn lb-btn lb-prev" id="lb-prev" type="button" aria-label="Foto anterior"><svg width="24" height="24" aria-hidden="true"><use href="#i-left"/></svg></button>
+  <button class="icon-btn lb-btn lb-next" id="lb-next" type="button" aria-label="Próxima foto"><svg width="24" height="24" aria-hidden="true"><use href="#i-right"/></svg></button>
+</div>
+
+<!-- ================= PLAYER ================= -->
+<div class="video-box hidden" id="video-box"><div id="yt"></div></div>
+<audio id="audio" preload="none"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="player" id="player" role="region" aria-label="Player de música">
+  <span class="mini-progress" aria-hidden="true"><i id="mini-bar"></i></span>
+  <div class="p-main">
+    <div class="disc" aria-hidden="true"></div>
+    <div class="p-info">
+      <button class="now-btn" id="now-btn" type="button" aria-describedby="now-hint">
+        <span class="now mono" id="now-label">Tocando agora</span>
+        <span class="title" id="now-title">Aperte o play</span>
+      </button>
+      <span id="now-hint" hidden>Ir até o card da música na tracklist</span>
+      <div class="seek">
+        <span class="time mono" id="t-cur">0:00</span>
+        <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Posição da música" aria-valuetext="0:00 de 0:00">
+        <span class="time mono" id="t-dur">0:00</span>
+      </div>
+    </div>
+    <div class="p-ctrls">
+      <button class="icon-btn" id="shuffle" type="button" aria-label="Modo aleatório" aria-pressed="false"><svg width="20" height="20" aria-hidden="true"><use href="#i-shuffle"/></svg></button>
+      <button class="icon-btn" id="prev" type="button" aria-label="Música anterior"><svg width="22" height="22" aria-hidden="true"><use href="#i-prev"/></svg></button>
+      <button class="icon-btn main" id="toggle" type="button" aria-label="Tocar">
+        <svg id="ic-play" width="24" height="24" aria-hidden="true"><use href="#i-play"/></svg>
+        <svg id="ic-pause" width="24" height="24" aria-hidden="true" hidden><use href="#i-pause"/></svg>
+      </button>
+      <button class="icon-btn" id="next" type="button" aria-label="Próxima música"><svg width="22" height="22" aria-hidden="true"><use href="#i-next"/></svg></button>
+    </div>
+    <div class="p-extra">
+      <div class="vol">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-vol"/></svg>
+        <input type="range" id="vol" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+      <div class="pick">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-list"/></svg>
+        <select id="pick" aria-label="Escolher música"></select>
+      </div>
+      <button class="icon-btn" id="video-toggle" type="button" aria-label="Mostrar o clipe" aria-pressed="false" aria-controls="video-box"><svg width="22" height="22" aria-hidden="true"><use href="#i-video"/></svg></button>
+    </div>
+    <button class="icon-btn expand" id="expand" type="button" aria-label="Mais controles" aria-expanded="false"><svg width="22" height="22" aria-hidden="true"><use href="#i-up"/></svg></button>
+  </div>
+</div>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+</body>
+</html>
