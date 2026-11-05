@@ -254,6 +254,14 @@
     const t = TRACKS[S.current];
     setTitle(`${t.song} · One Direction`);
     pick.value = S.current;
+    // tocando MP3 não há clipe: esconde o botão e a caixa do vídeo
+    const mp3 = isMp3(S.current);
+    $('#video-toggle').hidden = mp3;
+    if (mp3 && !videoBox.classList.contains('hidden')) {
+      videoBox.classList.add('hidden');
+      $('#video-toggle').setAttribute('aria-pressed', 'false');
+      $('#video-toggle').setAttribute('aria-label', 'Mostrar o clipe');
+    }
     cards.forEach((el, k) => {
       el.classList.toggle('active', k === S.current);
       el.style.removeProperty('--p');
