@@ -574,8 +574,11 @@ html.js .letter[data-reveal].in{transform:rotate(-.6deg)}
     -webkit-mask:radial-gradient(circle 14px at 0 100%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 100%,transparent 98%,#000) right/51% 100% no-repeat;
             mask:radial-gradient(circle 14px at 0 100%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 100%,transparent 98%,#000) right/51% 100% no-repeat}
   .ticket-main::after{top:auto;bottom:0;left:22px;right:22px;border-right:0;border-bottom:3px dashed rgba(27,31,59,.35)}
+  .ticket-info{display:grid;grid-template-columns:1fr 1fr}
   .ticket-info dd{font-size:13px}
   .ticket-info div{padding:7px 9px}
+  .ticket-info div:nth-child(2n){border-right:0}
+  .ticket-info div:nth-child(-n+2){border-bottom:2px solid var(--ink)}
   .btn-big{width:100%}
   .ticket-stub{width:auto;flex-direction:row;border-radius:0 0 20px 20px;padding:14px 22px;transform-origin:0 0;
     -webkit-mask:radial-gradient(circle 14px at 0 0,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 0,transparent 98%,#000) right/51% 100% no-repeat;
