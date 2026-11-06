@@ -40,6 +40,10 @@ body{
   overflow-x:hidden;
 }
 html.splash-open,html.splash-open body,html.lb-open,html.lb-open body{overflow:hidden}
+/* Enquanto o ingresso está aberto, nada da página aparece por trás das barras do Safari no iPhone:
+   o fundo da tela inteira fica azul-marinho e o conteúdo e o player ficam escondidos. */
+html.splash-open,html.splash-open body{background:var(--ink)}
+html.splash-open main,html.splash-open .player,html.splash-open .toast{visibility:hidden}
 /* grão de papel impresso */
 body::after{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:95;opacity:.07;
